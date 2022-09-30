@@ -1,37 +1,68 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int highest(int*);
+int crescente(int, int, int, int*, int*, int*);
 
-int main(int argc, char *argv[]) {
-    int nums[3];
+int main(int argc, char const *argv[]) {
+    int a, b, c;
+    printf("Insira os 3 valores separados por espaco: ");
+    scanf("%i %i %i", &a, &b, &c);
 
-    if (argc >= 4) {
-        for (int i=0; i < 3; i++) {
-            nums[i] = atoi(argv[i + 1]);
-        }
-    }
+    crescente(a, b, c, &a, &b, &c);
 
-    else {
-        for (int i = 0; i < 3; i++) {
-            printf("Insira o %i valor: ", i+1);
-            scanf(" %i", &nums[i]);
-        }
-    }
-
-    printf("O maior numero do vetor e: %i", highest(nums));
+    printf("A ordem crescente dos numero e: %i, %i, %i", a, b, c);
 
     return 0;
 }
 
-int highest(int nums[3]) {
-    int h = nums[0];
+int crescente(int a, int b, int c, int *pa, int *pb, int *pc) {
+    int nums[3];
 
-    for (int i = 1; i < 3; i++) {
-        if (nums[i] > h) {
-            h = nums[i];
+    if (c > a) {
+        if (a > b) {
+            nums[0] = b;
+            nums[1] = a;
+            nums[2] = c;
+        }
+
+        else if (b < c) {
+            nums[0] = a;
+            nums[1] = b;
+            nums[2] = c;
         }
     }
 
-    return h;
+    else if (a > b) {
+        if (b > c) {
+            nums[0] = c;
+            nums[0] = b;
+            nums[0] = a;
+        }
+
+        else if (c < a) {
+            nums[0] = b;
+            nums[0] = c;
+            nums[0] = a;
+        }
+    }
+
+    else if (a < b) {
+        if (c < a) {
+            nums[0] = c;
+            nums[1] = a;
+            nums[2] = b;
+        }
+
+        else if (c < b) {
+            nums[0] = a;
+            nums[1] = c;
+            nums[2] = b;
+        }
+    }
+
+    *pa = nums[0];
+    *pb = nums[1];
+    *pc = nums[2];
+
+    return 0;
 }
